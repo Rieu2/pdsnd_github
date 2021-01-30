@@ -2,9 +2,12 @@ import time
 import pandas as pd
 import numpy as np
 
-CITY_DATA = { 'chicago': 'C:/Users/jieyu/Desktop/Udacity/bikeshare-2/chicago.csv',
-              'new york city': 'C:/Users/jieyu/Desktop/Udacity/bikeshare-2/new_york_city.csv',
-              'washington': 'C:/Users/jieyu/Desktop/Udacity/bikeshare-2/washington.csv' }
+CITY_DATA = { 'chicago': 'chicago.csv',
+              'new york city': 'new_york_city.csv',
+              'washington': 'washington.csv' }
+cities = ['chicago', 'new york city', 'washington']
+month_names = ['all', 'january', 'february', 'march', 'april', 'may', 'june']
+days = ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
 def get_filters():
     """
@@ -19,7 +22,7 @@ def get_filters():
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
         try:
-            city = input("Enter the name of the city (chicago, new york city, washingtong): ").lower()
+            city = input("Enter the name of the city (chicago, new york city, washington): ").lower()
         except:
             print("Sorry, I didn't understand that. Please try again")
             continue
