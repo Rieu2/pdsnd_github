@@ -70,7 +70,7 @@ def load_data(city, month, day):
     df = pd.read_csv(CITY_DATA[city])
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['month'] = df['Start Time'].dt.month
-    df['day'] = df['Start Time'].dt.dayofweek
+    df['day'] = df['Start Time'].dt.day_name()
 
     if month != 'all':
         # use the index of the months list to get the corresponding int
@@ -93,14 +93,14 @@ def time_stats(df):
     start_time = time.time()
 
     # display the most common month
-    popular_month = df['month'].mode()
+    popular_month = df['month'].mode()[0]
     print("\nThe most common month is: \n{}".format(popular_month))
     # display the most common day of week
-    popular_day_of_week = df['day'].mode()
+    popular_day_of_week = df['day'].mode()[0]
 
     print("\nThe most common day of week is: \n{}".format(popular_day_of_week))
     # display the most common start hour
-    popular_start_hour = df['Start Time'].dt.hour.mode()
+    popular_start_hour = df['Start Time'].dt.hour.mode()[0]
 
     print("\nThe most common start hour is: \n{}".format(popular_start_hour))
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -114,10 +114,10 @@ def station_stats(df):
     start_time = time.time()
 
     # display most commonly used start station
-    popular_start_station = df['Start Station'].mode()
+    popular_start_station = df['Start Station'].mode()[0]
     print("\nThe most commonly used start station is: \n{}".format(popular_start_station))
     # display most commonly used end station
-    popular_end_station = df['End Station'].mode()
+    popular_end_station = df['End Station'].mode()[0]
     print("\nThe most commonly used end station is: \n{}".format(popular_end_station))
     # display most frequent combination of start station and end station trip
     popular_start_n_end_station = df.groupby(['Start Station', 'End Station']).size().sort_values(ascending=False)
@@ -160,7 +160,7 @@ def user_stats(df):
     print("\nThe earliest year of birth is: \n{}".format(earliest_birth_year))
     most_recent_birth_year = df['Birth Year'].max()
     print("\nThe most recent year of birth is: \n{}".format(most_recent_birth_year))
-    most_common_birth_year = df['Birth Year'].mode()
+    most_common_birth_year = df['Birth Year'].mode()[0]
     print("\nThe most common year of birth is: \n{}".format(most_common_birth_year))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
